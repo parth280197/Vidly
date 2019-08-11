@@ -231,6 +231,14 @@
     <Compile Include="Migrations\201908110104317_requireAddedToNameInMovie.Designer.cs">
       <DependentUpon>201908110104317_requireAddedToNameInMovie.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908112213052_RequireAddedToMovie.cs" />
+    <Compile Include="Migrations\201908112213052_RequireAddedToMovie.Designer.cs">
+      <DependentUpon>201908112213052_RequireAddedToMovie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908112232371_RequireAddedToMovie1.cs" />
+    <Compile Include="Migrations\201908112232371_RequireAddedToMovie1.Designer.cs">
+      <DependentUpon>201908112232371_RequireAddedToMovie1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -366,6 +374,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908110104317_requireAddedToNameInMovie.resx">
       <DependentUpon>201908110104317_requireAddedToNameInMovie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908112213052_RequireAddedToMovie.resx">
+      <DependentUpon>201908112213052_RequireAddedToMovie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908112232371_RequireAddedToMovie1.resx">
+      <DependentUpon>201908112232371_RequireAddedToMovie1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

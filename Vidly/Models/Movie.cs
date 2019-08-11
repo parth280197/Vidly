@@ -6,6 +6,7 @@ namespace Vidly.Models
   public class Movie
   {
     public int Id { get; set; }
+
     [Required]
     public string Name { get; set; }
 
@@ -13,10 +14,14 @@ namespace Vidly.Models
     public virtual Genre Genre { get; set; }
 
     [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+    [Required]
     public DateTime? ReleasedDate { get; set; }
 
     [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+    [Required]
     public DateTime? AddedDate { get; set; }
+
+    [Range(0, 20)]
     public int Stock { get; set; }
   }
 

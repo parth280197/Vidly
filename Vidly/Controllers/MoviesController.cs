@@ -39,7 +39,8 @@ namespace Vidly.Controllers
       var genre = dbContext.Genres.ToList();
       var viewModel = new MovieFormViewModel()
       {
-        Genre = genre
+        Genre = genre,
+        Movie = new Movie(),
       };
       return View("MovieForm", viewModel);
     }
@@ -47,6 +48,15 @@ namespace Vidly.Controllers
     [HttpPost]
     public ActionResult Save(Movie movie)
     {
+      if (!ModelState.IsValid)
+      {
+        var ViewModel = new MovieFormViewModel()
+        {
+          Movie = new Movie(),
+          Genre = dbContext.Genres.ToList(),
+        };
+        return View("MovieForm", ViewModel);
+      }
       if (ModelState.IsValid)
       {
         if (movie.Id == 0)
