@@ -1,9 +1,7 @@
-﻿using AutoMapper;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
-using Vidly.Dtos;
 using Vidly.Models;
 
 namespace Vidly.Controllers.Api
@@ -16,33 +14,33 @@ namespace Vidly.Controllers.Api
     {
       _context = new ApplicationDbContext();
     }
-    public IEnumerable<CustomerDto> GetCustomers()
+    public IEnumerable<Customer> GetCustomers()
     {
-      var Customers = _context.Customers.ToList().Select(Mapper.Map<Customer, CustomerDto>);
+      var Customers = _context.Customers.ToList();
       return Customers;
     }
-    public CustomerDto GetCustomer(int id)
+    public Customer GetCustomer(int id)
     {
       var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
       if (customer == null)
         throw new HttpResponseException(HttpStatusCode.NotFound);
-      return Mapper.Map<Customer, CustomerDto>(customer);
+      return customer;
     }
 
     [HttpPost]
-    public CustomerDto CreateCustomer(CustomerDto customerDto)
+    public Customer CreateCustomer(Customer customer)
     {
       if (!ModelState.IsValid)
         throw new HttpResponseException(HttpStatusCode.BadRequest);
-      var customer = Mapper.Map<CustomerDto, Customer>(customerDto);
+
       _context.Customers.Add(customer);
       _context.SaveChanges();
-      customerDto.Id = customer.Id;
-      return customerDto;
+
+      return customer;
     }
 
     [HttpPut]
-    public void UpdateCustomer(int id, CustomerDto customerDto)
+    public void UpdateCustomer(int id, Customer customer)
     {
       if (!ModelState.IsValid)
         throw new HttpResponseException(HttpStatusCode.BadRequest);
@@ -51,7 +49,13 @@ namespace Vidly.Controllers.Api
 
       if (customerInDb == null)
         throw new HttpResponseException(HttpStatusCode.NotFound);
-      Mapper.Map(customerDto, customerInDb);
+
+      customerInDb.Id = customer.Id;
+      customerInDb.Birthdate = customer.Birthdate;
+      customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
+      customerInDb.MembershipTypeId = customer.MembershipTypeId;
+      customerInDb.Name = customer.Name;
+
       _context.SaveChanges();
     }
 
