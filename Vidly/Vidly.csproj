@@ -275,6 +275,9 @@
     <Compile Include="ViewModel\RandomViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Image\1.jpg" />
+    <Content Include="Content\Image\2.jpg" />
+    <Content Include="Content\Image\3.jpg" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
