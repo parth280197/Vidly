@@ -21,8 +21,8 @@ namespace Vidly.Controllers
     }
     public ViewResult Index()
     {
-      var customers = _context.Customers;
-      return View(customers);
+      //var customers = _context.Customers;
+      return View(/*customers*/);
     }
 
     public ActionResult Edit(int id)

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Vidly.Models.Customer>
+﻿@*@model IEnumerable<Vidly.Models.Customer>*@
 
 @{
   ViewBag.Title = "Index";
@@ -23,20 +23,6 @@
     </tr>
   </thead>
   <tbody>
-    @foreach (var item in Model)
-    {
-      <tr>
-        <td>
-          @Html.ActionLink(item.Name, "Edit", new { id = item.Id },null)
-        </td>
-        <td>
-          @item.MembershipType.Name
-        </td>
-        <td>
-          <button data-customer-id="@item.Id" class="btn btn-link js-delete">Delete</button>
-        </td>
-      </tr>
-    }
   </tbody>
 </table>
 <table id="example" class="display" width="100%"></table>
@@ -45,7 +31,29 @@
     $(document).ready(function () {
       
       var table = $("#customers");
-      table.DataTable({});
+      table.DataTable({
+        "ajax": {
+          url: "/api/customers",
+          dataSrc:""
+        },
+        columns: [
+          {
+            data: "name",
+            render: function (data, type, customer) {
+              return "<a href='/customers/edit/" + customer.id + "'>"+data+"</a>"
+            }
+          },
+          {
+            data:"name"
+          },
+          {
+            data: "id",
+            render: function (data) {
+              return "<button class='btn btn-link js-delete' data-customer-id=" + data + ">Delete</button>"
+            }
+          }
+        ]
+      });
       $("#customers").on("click",".js-delete",function () {
         var button = $(this);
         bootbox.confirm("Are you sure want to delete the customer.", function (result) {
