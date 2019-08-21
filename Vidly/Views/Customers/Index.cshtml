@@ -30,7 +30,7 @@
     @item.MembershipType.Name
   </td>
   <td>
-    <button class="btn btn-link js-delete">Delete</button>
+    <button data-customer-id="@item.Id" class="btn btn-link js-delete">Delete</button>
   </td>
 </tr>
 }
@@ -40,7 +40,16 @@
   <script>
     $(document).ready(function () {
       $("#customers .js-delete").click(function () {
-        confirm("Are you sure want to delete the customer.");
+        var button = $(this);
+        if (confirm("Are you sure want to delete the customer.")) {
+          $.ajax({
+            url: "/api/customers/" + button.attr("data-customer-id"),
+            method: "DELETE",
+            success: function () {
+              button.parents("tr").remove();
+            }
+          })
+        }
       });
     });
   </script>
