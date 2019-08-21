@@ -8,15 +8,18 @@
 
 <p>
 </p>
-<table class="table table-striped">
-    <tr>
-      <th>
-        @Html.DisplayNameFor(model => model.Name)
-      </th>
-      <th>
-        Membership Type
-      </th>
-    </tr>
+<table id="customers" class="table table-striped">
+  <tr>
+    <th>
+      @Html.DisplayNameFor(model => model.Name)
+    </th>
+    <th>
+      Membership Type
+    </th>
+    <th>
+      Delete
+    </th>
+  </tr>
 
 @foreach (var item in Model) {
 <tr>
@@ -26,7 +29,19 @@
   <td>
     @item.MembershipType.Name
   </td>
+  <td>
+    <button class="btn btn-link js-delete">Delete</button>
+  </td>
 </tr>
 }
 
 </table>
+@section scripts {
+  <script>
+    $(document).ready(function () {
+      $("#customers .js-delete").click(function () {
+        confirm("Are you sure want to delete the customer.");
+      });
+    });
+  </script>
+  }
