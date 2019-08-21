@@ -8,38 +8,44 @@
 
 <p>
 </p>
-<table id="customers" class="table table-striped">
-  <tr>
-    <th>
-      @Html.DisplayNameFor(model => model.Name)
-    </th>
-    <th>
-      Membership Type
-    </th>
-    <th>
-      Delete
-    </th>
-  </tr>
-
-  @foreach (var item in Model)
-  {
+<table id="customers" class="table table-striped table-hover">
+  <thead>
     <tr>
-      <td>
-        @Html.ActionLink(item.Name, "Edit", new { id = item.Id })
-      </td>
-      <td>
-        @item.MembershipType.Name
-      </td>
-      <td>
-        <button data-customer-id="@item.Id" class="btn btn-link js-delete">Delete</button>
-      </td>
+      <th>
+        Customer
+      </th>
+      <th>
+        Membership Type
+      </th>
+      <th>
+        Delete
+      </th>
     </tr>
-  }
-
+  </thead>
+  <tbody>
+    @foreach (var item in Model)
+    {
+      <tr>
+        <td>
+          @Html.ActionLink(item.Name, "Edit", new { id = item.Id },null)
+        </td>
+        <td>
+          @item.MembershipType.Name
+        </td>
+        <td>
+          <button data-customer-id="@item.Id" class="btn btn-link js-delete">Delete</button>
+        </td>
+      </tr>
+    }
+  </tbody>
 </table>
+<table id="example" class="display" width="100%"></table>
 @section scripts {
   <script>
     $(document).ready(function () {
+      
+      var table = $("#customers");
+      table.DataTable({});
       $("#customers").on("click",".js-delete",function () {
         var button = $(this);
         bootbox.confirm("Are you sure want to delete the customer.", function (result) {
