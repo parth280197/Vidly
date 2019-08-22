@@ -16,12 +16,12 @@ namespace Vidly.Controllers
     // GET: Movies
     public ActionResult Index()
     {
-      if (User.IsInRole("canManageMovie"))
+      if (User.IsInRole(RoleNames.CanManageMovies))
         return View("List");
       else
         return View("ReadOnlyList");
     }
-
+    [Authorize(Roles = RoleNames.CanManageMovies)]
     public ActionResult Edit(int Id)
     {
       ViewBag.Action = "Update";
@@ -35,7 +35,7 @@ namespace Vidly.Controllers
       };
       return View("MovieForm", viewModel);
     }
-    [Authorize(Roles = "canManageMovie")]
+    [Authorize(Roles = RoleNames.CanManageMovies)]
     public ActionResult Save()
     {
       ViewBag.Action = "Create new movie";
