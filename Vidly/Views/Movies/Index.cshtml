@@ -6,25 +6,36 @@
 
 <h2>Movies</h2>
 @Html.ActionLink("Add Movie","Save","Movies",new {@class="btn btn-success"})
-<table class="table table-striped">
-  <tr>
-    <th>
-      Movie
-    </th>
-    <th>
-      Generes
-    </th>
-  </tr>
-  @foreach (Movie movie in Model)
-  {
+<table id="movies" class="table table-striped">
+  <thead>
     <tr>
-      <td>
-        @Html.ActionLink(movie.Name,"Edit",new {Id=movie.Id})
-      </td>
-      <td>
-        @movie.Genre.Name
-      </td>
+      <th>
+        Movie
+      </th>
+      <th>
+        Generes
+      </th>
     </tr>
-  }
+  </thead>
+  <tbody>
+    @foreach (Movie movie in Model)
+    {
+      <tr>
+        <td>
+          @Html.ActionLink(movie.Name, "Edit", new { Id = movie.Id })
+        </td>
+        <td>
+          @movie.Genre.Name
+        </td>
+      </tr>
+    }
+  </tbody>
 </table>
+@section scripts{
+  <script>
+    $(document).ready(function () {
+      var table = $("#movies").DataTable();
+    })
+  </script>
+  }
 

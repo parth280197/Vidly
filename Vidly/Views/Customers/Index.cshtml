@@ -61,8 +61,6 @@
               url: "/api/customers/" + button.attr("data-customer-id"),
               method: "DELETE",
               success: function () {
-                console.log("deleted");
-                console.log(button.parents('tr'));
                 table.row(button.parents('tr')).remove().draw();
               }
             }) 
