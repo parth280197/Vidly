@@ -30,8 +30,7 @@
   <script>
     $(document).ready(function () {
       
-      var table = $("#customers");
-      table.DataTable({
+      var table = $("#customers").DataTable({
         "ajax": {
           url: "/api/customers",
           dataSrc:""
@@ -62,9 +61,11 @@
               url: "/api/customers/" + button.attr("data-customer-id"),
               method: "DELETE",
               success: function () {
-                table.row(button.parents("tr")).remove().draw();
+                console.log("deleted");
+                console.log(button.parents('tr'));
+                table.row(button.parents('tr')).remove().draw();
               }
-            })
+            }) 
           }
         })
       });
