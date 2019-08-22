@@ -18,23 +18,25 @@
     </tr>
   </thead>
   <tbody>
-    @foreach (Movie movie in Model)
-    {
-      <tr>
-        <td>
-          @Html.ActionLink(movie.Name, "Edit", new { Id = movie.Id })
-        </td>
-        <td>
-          @movie.Genre.Name
-        </td>
-      </tr>
-    }
   </tbody>
 </table>
 @section scripts{
   <script>
     $(document).ready(function () {
-      var table = $("#movies").DataTable();
+      var table = $("#movies").DataTable({
+        "ajax": {
+          url: "/api/movies",
+          dataSrc:""
+        },
+        columns: [
+          {
+            data:"name"
+          },
+          {
+            data:"genreId"
+          }
+        ]
+      });
     })
   </script>
   }
